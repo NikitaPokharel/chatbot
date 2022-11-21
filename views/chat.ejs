@@ -36,11 +36,13 @@
     <header>
         <h3>Therapy bot</h3>
     </header>
-    <div class="container text-center ">
 
-        <i class="fa fa-microphone" style="font-size:40px; margin-top: 250px;color: teal;"></i>
-        <!-- <i class="fa-solid fa-stop"  style="font-size:40px; margin-top: 250px;margin-left:35px;color: teal;"></i> -->
-    
+    <div class="container text-center " style="height: 75px; margin-top:455px; border: 2px solid teal;">
+        <i class="fa fa-microphone" style="font-size:40px;margin-left:900px;color: teal; margin-top: 10px;"></i>    
+        <h3 style=" margin-left:650px;font-weight:bold; margin-top: -25px;">Speak here</h3>
+
+        <!-- <i class="fa fa-microphone" style="font-size:40px; margin-top: 450px;margin-left:900px;color: teal;"></i>    
+        <h3 style="margin-bottom: 20px;margin-top:-30px; margin-left:650px;font-weight:bold">Speak here</h3> -->
 
 
         <br />
@@ -66,7 +68,7 @@
         // start the recording
         const startRecording = function() {
             mediaRecorder.start();
-            button.classList.toggle('btn-danger');
+            button.classList.toggle('btn-info');
             button.removeEventListener('click', startRecording);
             button.addEventListener('click', stopRecording);
         }
@@ -75,7 +77,7 @@
         const stopRecording = function() {
             mediaRecorder.stop();
             // button.textContent = 'fa-microphone';
-            button.classList.toggle('btn-danger');
+            button.classList.toggle('btn-info');
             button.removeEventListener('click', stopRecording);
             button.addEventListener('click', startRecording);
         }
