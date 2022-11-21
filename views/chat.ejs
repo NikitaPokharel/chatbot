@@ -37,8 +37,11 @@
         <h3>Therapy bot</h3>
     </header>
     <div class="container text-center ">
-        
-        <button class="btn btn-primary">Speak</button>
+
+        <i class="fa fa-microphone" style="font-size:40px; margin-top: 250px;color: teal;"></i>
+        <!-- <i class="fa-solid fa-stop"  style="font-size:40px; margin-top: 250px;margin-left:35px;color: teal;"></i> -->
+    
+
 
         <br />
         <br />
@@ -55,7 +58,7 @@
    
 
     <script>
-        const button = document.querySelector('button');
+        const button = document.querySelector('i');
 
         const options = {mimeType: 'audio/webm'};
         const buffer = [];
@@ -71,7 +74,7 @@
         // stop the recording
         const stopRecording = function() {
             mediaRecorder.stop();
-            button.textContent = 'Speak';
+            // button.textContent = 'fa-microphone';
             button.classList.toggle('btn-danger');
             button.removeEventListener('click', stopRecording);
             button.addEventListener('click', startRecording);
