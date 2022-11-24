@@ -6,8 +6,8 @@
     <title>Therapy Bot</title>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 
     <style>
         li { list-style: none; }
@@ -36,28 +36,24 @@
     <header>
         <h3>Therapy bot</h3>
     </header>
-
-    <div class="container text-center " style="height: 75px; margin-top:455px; border: 2px solid teal;">
-        <i class="fa fa-microphone" style="font-size:40px;margin-left:900px;color: teal; margin-top: 10px;"></i>    
-        <h3 style=" margin-left:650px;font-weight:bold; margin-top: -25px;">Speak here</h3>
-
-        <!-- <i class="fa fa-microphone" style="font-size:40px; margin-top: 450px;margin-left:900px;color: teal;"></i>    
-        <h3 style="margin-bottom: 20px;margin-top:-30px; margin-left:650px;font-weight:bold">Speak here</h3> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-6 ">
+                <span id="mytexts"></span>
 
 
-        <br />
-        <br />
-        <br />
-
-        <ul id="playlist"></ul>
-    </div>
-
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-6 ">
+                <span id="reply"></span>
+                
+            </div>
+        </div>
     
-        <!-- <a id="download">Download</a>
-        <button id="stop">Stop</button>
-        <br />
-        <audio id="player" controls></audio> -->
-   
+        </div>
+        <div class="container text-center " style="height: 75px; margin-top:455px; border: 2px solid teal;">
+            <i class="fa fa-microphone" style="font-size:40px;margin-left:900px;color: teal; margin-top: 10px;"></i>    
+            <h3 style=" margin-left:650px;font-weight:bold; margin-top: -25px;">Speak here</h3>
+    
 
     <script>
         const button = document.querySelector('i');
@@ -104,14 +100,32 @@
                     lastModified: Date.now()
                     
                 });
+            
                 console.log(file);
-                var url = "http://127.0.0.1:8000/audio";
-                var audio = new FormData();
-                audio.append('audio',file);
-                console.log(audio)
-                fetch(url, {method:"post",body:audio})
-                .then(response=>{console.log(response.data)})
-                .catch(err=>{console.log("error")})
+                const formdata = new FormData();
+                formdata.append('audio', file);
+                console.log(formdata);
+                fetch("http://localhost:8000/audio", {
+                    method: "POST",
+                    body: formdata
+                }).then(res => res.json()).then(data => {
+                    var recogtext = data.texts;
+                    var textreply= data.reply;
+                    document.getElementById("mytexts").innerHTML=recogtext;
+                    document.getElementById("reply").innerHTML=textreply;
+                })
+
+
+
+
+                // console.log(file);
+                // var url = "http://127.0.0.1:8000/audio";
+                // var audio = new FormData();
+                // audio.append('audio',file);
+                // console.log(audio)
+                // fetch(url, {method:"post",body:audio})
+                // .then(response=>{console.log(response.data)})
+                // .catch(err=>{console.log("error")})
 
             
             //     saveBlob(file, 'myRecording.wav');
